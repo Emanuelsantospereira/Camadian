@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Finalizar Compra</h1>
+    </header>
+
+    <div class="checkout-container">
+        <section class="cart-items">
+            <h2>Itens no Carrinho</h2>
+            <ul id="cartItems">
+                <!-- Itens serão adicionados aqui dinamicamente -->
+            </ul>
+            <div id="totalPrice">
+                <strong>Total: R$ 0,00</strong>
+            </div>
+        </section>
+
+        <section class="checkout-form">
+            <h2>Detalhes da Compra</h2>
+            <form id="checkoutForm">
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" required>
+
+                <label for="pagamento">Forma de Pagamento:</label>
+                <select id="pagamento" name="pagamento" required>
+                    <option value="cartao">Cartão de Crédito</option>
+                    <option value="boleto">Boleto Bancário</option>
+                </select>
+
+                <button type="submit">Finalizar Compra</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // Exemplo de produtos no carrinho, substitua com dados reais
+        const cartItems = [
+            { name: "Fone JBL", price: 199.99 },
+            { name: "Teclado Razer", price: 600.99 },
+            // Adicione mais itens conforme necessário
+        ];
+
+        // Função para atualizar a lista de produtos e o total
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const totalPriceElement = document.getElementById('totalPrice');
+
+            let total = 0;
+            cartItemsContainer.innerHTML = ''; // Limpa a lista
+
+            cartItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+                cartItemsContainer.appendChild(listItem);
+                total += item.price;
+            });
+
+            totalPriceElement.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+        }
+
+        // Função de finalização da compra
+        document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previne o envio do formulário para teste
+            alert('Compra finalizada com sucesso!');
+            // Aqui você pode adicionar a lógica para processar o pagamento e redirecionar o usuário
+        });
+
+        // Atualiza o carrinho ao carregar a página
+        window.onload = updateCart;
+    </script>
+</body>
+</html>
